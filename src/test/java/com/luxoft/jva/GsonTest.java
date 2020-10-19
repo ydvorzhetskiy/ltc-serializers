@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 
 import static java.util.Collections.singletonList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("GSON examples")
 public class GsonTest {
 
-    @DisplayName("Simple JSON serialization using GSON")
+    @DisplayName("Simple JSON serialization")
     @Test
     void simpleSerialization() {
         // creating GSON object using default configuration;
@@ -22,7 +24,22 @@ public class GsonTest {
                 42, "John Doe", singletonList("jd@ex.com")
             )
         );
-        System.out.println(json);
         // {"id":42,"name":"John Doe","emails":["jd@ex.com"]}
+
+        assertEquals(json, "{\"id\":42,\"name\":\"John Doe\",\"emails\":[\"jd@ex.com\"]}");
+    }
+
+    @DisplayName("Simple JSON deserialization")
+    @Test
+    void simpleDeserialization() {
+        Gson gson = new Gson();
+
+        // deserialize
+        PersonGson obj = gson.fromJson(
+            "{\"id\":42,\"name\":\"John Doe\",\"emails\":[\"jd@ex.com\"]}",
+            PersonGson.class
+        );
+
+        assertEquals(obj.getName(), "John Doe");
     }
 }
