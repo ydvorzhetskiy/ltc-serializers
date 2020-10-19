@@ -26,7 +26,7 @@ public class GsonTest {
         );
         // {"id":42,"name":"John Doe","emails":["jd@ex.com"]}
 
-        assertEquals(json, "{\"id\":42,\"name\":\"John Doe\",\"emails\":[\"jd@ex.com\"]}");
+        assertEquals("{\"id\":42,\"name\":\"John Doe\",\"emails\":[\"jd@ex.com\"]}", json);
     }
 
     @DisplayName("Simple JSON deserialization")
@@ -40,6 +40,17 @@ public class GsonTest {
             PersonGson.class
         );
 
-        assertEquals(obj.getName(), "John Doe");
+        assertEquals("John Doe", obj.getName());
+    }
+
+    @DisplayName("Custom fields names")
+    @Test
+    void customFieldNames() {
+        Gson gson = new Gson();
+
+        // serialize object to JSON
+        String json = gson.toJson(new PersonCustomFieldsGson(42, "John Doe"));
+
+        assertEquals("{\"_id\":42,\"personName\":\"John Doe\"}", json);
     }
 }
