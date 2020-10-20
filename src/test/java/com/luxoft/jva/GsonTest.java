@@ -4,8 +4,6 @@ import com.google.gson.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,35 +48,38 @@ public class GsonTest {
         Gson gson = new Gson();
 
         // serialize object to JSON
-        String json = gson.toJson(new PersonCustomFieldsGson(42, "John Doe"));
+        String json = gson.toJson(new PersonCustomFieldsGson(42, 18, "John Doe"));
 
-        assertEquals("{\"_id\":42,\"personName\":\"John Doe\"}", json);
+        // {"_id":42,"age":18,"personName":"John Doe"}
+        System.out.println(json);
+
+        assertEquals("{\"_id\":42,\"age\":18,\"personName\":\"John Doe\"}", json);
     }
 
     @DisplayName("Field names and exclusions strategy")
     @Test
     void fieldNamesStrategy() {
         Gson gson = new GsonBuilder()
-                .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .addSerializationExclusionStrategy(new ExclusionStrategy() {
-                    @Override
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getName().equals("id");
-                    }
+            .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .addSerializationExclusionStrategy(new ExclusionStrategy() {
+                @Override
+                public boolean shouldSkipField(FieldAttributes f) {
+                    return f.getName().equals("id");
+                }
 
-                    @Override
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-                })
-                .setPrettyPrinting()
-                .create();
+                @Override
+                public boolean shouldSkipClass(Class<?> clazz) {
+                    return false;
+                }
+            })
+            .setPrettyPrinting()
+            .create();
 
         String json = gson.toJson(new PersonGson(42, "Ivan", emptyList()));
 
         assertEquals("{\n" +
-                "  \"name\": \"Ivan\",\n" +
-                "  \"emails\": []\n" +
-                "}", json);
+            "  \"name\": \"Ivan\",\n" +
+            "  \"emails\": []\n" +
+            "}", json);
     }
 }
