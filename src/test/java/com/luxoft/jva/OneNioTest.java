@@ -18,13 +18,13 @@ public class OneNioTest {
 
         DataStream dataStream = new DataStream(1000);
 
-        // OneNio Serializer
+        // One NIO Serializer
         Serializer<PersonOneNio> serializer = Repository.get(PersonOneNio.class);
         serializer.write(person, dataStream);
 
         System.out.println(new String(dataStream.array()));
 
-        // OneNIO Deserialization
+        // One NIO Deserialization
         DataStream inputDataStream = new DataStream(dataStream.array());
 
         PersonOneNio read = serializer.read(inputDataStream);
