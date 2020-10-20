@@ -19,7 +19,7 @@ public class JacksonExtensionsTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    void setUpClass() {
+    void setUp() {
         objectMapper = JsonMapper.builder()
                 .addModule(new JavaTimeModule())
                 .configure(WRITE_DATES_AS_TIMESTAMPS, false)
