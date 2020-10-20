@@ -1,11 +1,12 @@
 package com.luxoft.jva;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,5 +53,32 @@ public class GsonTest {
         String json = gson.toJson(new PersonCustomFieldsGson(42, "John Doe"));
 
         assertEquals("{\"_id\":42,\"personName\":\"John Doe\"}", json);
+    }
+
+    @DisplayName("Field names and exclusions strategy")
+    @Test
+    void fieldNamesStrategy() {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingStrategy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .addSerializationExclusionStrategy(new ExclusionStrategy() {
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes f) {
+                        return f.getName().equals("id");
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+                })
+                .setPrettyPrinting()
+                .create();
+
+        String json = gson.toJson(new PersonGson(42, "Ivan", emptyList()));
+
+        assertEquals("{\n" +
+                "  \"name\": \"Ivan\",\n" +
+                "  \"emails\": []\n" +
+                "}", json);
     }
 }
