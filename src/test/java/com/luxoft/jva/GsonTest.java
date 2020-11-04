@@ -48,12 +48,14 @@ public class GsonTest {
         Gson gson = new Gson();
 
         // serialize object to JSON
-        String json = gson.toJson(new PersonCustomFieldsGson(42, 18, "John Doe"));
+        String json = gson.toJson(new PersonCustomFieldsGson(
+            42, 18, "John Doe", "pass"
+        ));
 
         // {"_id":42,"age":18,"personName":"John Doe"}
         System.out.println(json);
 
-        assertEquals("{\"_id\":42,\"age\":18,\"personName\":\"John Doe\"}", json);
+        assertEquals("{\"id\":42,\"_age\":18,\"personName\":\"John Doe\"}", json);
     }
 
     @DisplayName("Field names and exclusions strategy")
