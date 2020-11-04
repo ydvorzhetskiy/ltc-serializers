@@ -8,6 +8,8 @@ public class PersonGson {
     private String name;
     private List<String> emails;
 
+    // GSON require no-args constructor for JSON deserialization
+    @SuppressWarnings("unused")
     public PersonGson() {
     }
 
@@ -21,23 +23,14 @@ public class PersonGson {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // GSON does not require setters to set fields
+    //public void setId(int id) { this.id = id; }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<String> getEmails() {
         return emails;
-    }
-
-    public void setEmails(List<String> emails) {
-        this.emails = emails;
     }
 }
