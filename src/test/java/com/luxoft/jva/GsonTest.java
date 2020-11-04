@@ -58,6 +58,24 @@ public class GsonTest {
         assertEquals("{\"id\":42,\"_age\":18,\"personName\":\"John Doe\"}", json);
     }
 
+    @DisplayName("Expose and expose strategy field")
+    @Test
+    void exposeFieldNames() {
+        Gson gson = new GsonBuilder()
+            .excludeFieldsWithoutExposeAnnotation()
+            .create();
+
+        // serialize object to JSON
+        String json = gson.toJson(new PersonExposeGson(
+            42, "John Doe", "pass"
+        ));
+
+        // {"_id":42,"age":18,"personName":"John Doe"}
+        System.out.println(json);
+
+        assertEquals("{\"id\":42,\"name\":\"John Doe\"}", json);
+    }
+
     @DisplayName("Field names and exclusions strategy")
     @Test
     void fieldNamesStrategy() {
