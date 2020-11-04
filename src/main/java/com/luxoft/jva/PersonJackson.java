@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties({"old", "old2"})
 public class PersonJackson {
+
     @JsonProperty(value = "_id", index = 2)
     private final int id;
     @JsonProperty(index = 1)
