@@ -42,7 +42,7 @@ public class GsonTest {
         assertEquals("John Doe", obj.getName());
     }
 
-    @DisplayName("Custom fields names")
+    @DisplayName("Custom fields names and transient field")
     @Test
     void customFieldNames() {
         Gson gson = new Gson();
