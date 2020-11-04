@@ -21,6 +21,7 @@ public class JacksonTest {
 
         // serialize
         String json = objectMapper.writeValueAsString(person);
+        // {"name":"John","_id":42}
 
         assertEquals("{\"name\":\"John\",\"_id\":42}", json);
     }
