@@ -70,9 +70,6 @@ public class GsonTest {
             42, "John Doe", "pass"
         ));
 
-        // {"_id":42,"age":18,"personName":"John Doe"}
-        System.out.println(json);
-
         assertEquals("{\"id\":42,\"name\":\"John Doe\"}", json);
     }
 
