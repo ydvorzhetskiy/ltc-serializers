@@ -4,8 +4,6 @@ import com.fasterxml.jackson.dataformat.smile.databind.SmileMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Jackson Smile example")
@@ -17,14 +15,18 @@ public class JacksonSmileTest {
     @DisplayName("Serialization to the Smile format and deserialization")
     @Test
     void smileSerialization() throws Exception {
-        PersonJacksonSmile person = new PersonJacksonSmile(42, "Vlad");
+        PersonJacksonSmile person = new PersonJacksonSmile(42, "Ivan");
 
         byte[] binary = smileMapper.writeValueAsBytes(person);
 
         System.out.println(new String(binary));
+        /*
+        :)
+        ��id$��nameCIvan�
+         */
 
         PersonJacksonSmile deserialized = smileMapper.readValue(binary, PersonJacksonSmile.class);
 
-        assertEquals("Vlad", deserialized.getName());
+        assertEquals("Ivan", deserialized.getName());
     }
 }
