@@ -14,7 +14,7 @@ public class OneNioTest {
     @DisplayName("Serialization and deserialization")
     @Test
     void serializationDeserialization() throws Exception {
-        PersonOneNio person = new PersonOneNio(42, "person");
+        PersonOneNio person = new PersonOneNio(42, "Ivan");
 
         DataStream dataStream = new DataStream(1000);
 
@@ -23,6 +23,10 @@ public class OneNioTest {
         serializer.write(person, dataStream);
 
         System.out.println(new String(dataStream.array()));
+        /*
+         *
+         *� Ivan
+         */
 
         // One NIO Deserialization
         DataStream inputDataStream = new DataStream(dataStream.array());

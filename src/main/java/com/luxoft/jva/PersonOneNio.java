@@ -8,9 +8,6 @@ public class PersonOneNio implements Serializable {
     private int id;
     private String name;
 
-    public PersonOneNio() {
-    }
-
     public PersonOneNio(int id, String name) {
         this.id = id;
         this.name = name;
