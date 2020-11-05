@@ -48,6 +48,13 @@
             <version>2.11.3</version>
         </dependency>
 
+        <!-- Protobuf -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+
         <!-- Kryo -->
         <dependency>
             <groupId>com.esotericsoftware</groupId>
