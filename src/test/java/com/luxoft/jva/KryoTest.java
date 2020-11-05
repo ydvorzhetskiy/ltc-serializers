@@ -7,9 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,14 +25,18 @@ public class KryoTest {
     @DisplayName("Simple serialization and deserialization")
     @Test
     void serialization() {
-        PersonKryo person = new PersonKryo(42, "Ivan");
+        kryo = new Kryo();
+        kryo.register(PersonKryo.class);
+
+        PersonKryo person = new PersonKryo(18, "Ivan");
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
         Output output = new Output(bos);
         kryo.writeObject(output, person);
         output.close();
 
-        System.out.println(Arrays.toString(bos.toByteArray()));
+        System.out.println(new String(bos.toByteArray()));
+        // $Iva�
 
         Input input = new Input(bos.toByteArray());
         PersonKryo read = kryo.readObject(input, PersonKryo.class);
