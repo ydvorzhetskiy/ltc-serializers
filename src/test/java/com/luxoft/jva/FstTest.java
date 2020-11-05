@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.nustaq.serialization.FSTConfiguration;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("FST examples")
@@ -21,6 +19,7 @@ public class FstTest {
         byte[] result = conf.asByteArray(person);
 
         System.out.println(new String(result));
+        // com.luxoft.jva.PersonFst*�Ivan
 
         PersonFst read = (PersonFst) conf.asObject(result);
 
